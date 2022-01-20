@@ -157,8 +157,21 @@ def _int_to_byte(i: int) -> bytes:
 #:
 
 def _main():
-    encode_rle('dadosX.bin', 'dadosX.bin.rle', METHOD_A, overwrite=True)
-    decode_rle('dadosX.bin.rle', 'dadosX.copia.bin', overwrite=True)
+    """
+    Interactive script.
+    """
+    def overwrite_if_needed_or_exit(dest_file_path: str):
+        if os.path.exists(dest_file_path):
+            answer = input(f"File {dest_file_path} exists. Overwrite (y or n)? ")
+            if answer.strip().lower() != 'y':
+                print("File will not be overwritten")
+                sys.exit()
+    #:
+    def exists_or_exit(file_path, error_code=3):
+        if not os.path.exists(file_path):
+            print(f"File {file_path} doesn't exist", file=sys.stderr)
+            sys.exit(error_code)
+    #:
 #:
 
 if __name__ == '__main__':
