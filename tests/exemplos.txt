@@ -1,0 +1,15 @@
+ORIGINAL: WBWBWB
+RLE 1   : 1W1B1W1B1W1B
+RLE 2   : WBWBWB
+
+----
+
+ORIGINAL: WWWBBB
+RLE 1   : 3W3B
+RLE 2   : WW3BB3
+
+------
+
+ORIGINAL: \x82\x7F\x7F\x7F\x7F\x9B\x9B... série de 300 ocorrências ...\x9B
+RLE1    : \x01\x82\x04\x7F\xFF\x9B\x2D\x9B
+RLE2    : \x82\x7F\x7F\x04\x9B\x9B\xFF\x9B\x9B\x2D
