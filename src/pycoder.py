@@ -172,6 +172,7 @@ def _main():
             print(f"File {file_path} doesn't exist", file=sys.stderr)
             sys.exit(error_code)
     #:
+    pass
 #:
 
 if __name__ == '__main__':
