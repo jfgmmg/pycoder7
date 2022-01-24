@@ -87,22 +87,23 @@ if TEST_ALL:
         return encode_in_mem(decode, rle_data)
     #:
 
-    print('\n____________ ENCODING METHOD_A\n')
-    tester.assert_("encode_in_mem(pycoder._encode_mA, test1) == test1_rle_A")
-    tester.assert_("encode_in_mem(pycoder._encode_mA, test2) == test2_rle_A")
+    print("\n____________ ENCODING METHOD_A\n")
+    tester.assert_('encode_in_mem(pycoder._encode_mA, test1) == test1_rle_A')
+    tester.assert_('encode_in_mem(pycoder._encode_mA, test2) == test2_rle_A')
 
-    print('\n____________ DECODING METHOD_A\n')
-    tester.assert_("decode_in_mem(pycoder._decode_mA, test1_rle_A) == test1")
-    tester.assert_("decode_in_mem(pycoder._decode_mA, test2_rle_A) == test2")
+    print("\n____________ DECODING METHOD_A\n")
+    tester.assert_('decode_in_mem(pycoder._decode_mA, test1_rle_A) == test1')
+    tester.assert_('decode_in_mem(pycoder._decode_mA, test2_rle_A) == test2')
 
-    print('\n____________ ENCODING METHOD_B\n')
-    tester.assert_("encode_in_mem(pycoder._encode_mB, test1) == test1_rle_B")
-    tester.assert_("encode_in_mem(pycoder._encode_mB, test2) == test2_rle_B")
+    print("\n____________ ENCODING METHOD_B\n")
+    tester.assert_('encode_in_mem(pycoder._encode_mB, test1) == test1_rle_B')
+    tester.assert_('encode_in_mem(pycoder._encode_mB, test2) == test2_rle_B')
 
-    print('\n____________ DECODING METHOD_B\n')
-    tester.assert_("decode_in_mem(pycoder._decode_mB, test1_rle_B) == test1")
-    tester.assert_("decode_in_mem(pycoder._decode_mB, test2_rle_B) == test2")
+    print("\n____________ DECODING METHOD_B\n")
+    tester.assert_('decode_in_mem(pycoder._decode_mB, test1_rle_B) == test1')
+    tester.assert_('decode_in_mem(pycoder._decode_mB, test2_rle_B) == test2')
 
-    print()
+    print('\n')
+    print(f"{15 * '*'} SUMMARY {15 * '*'}\n")
     tester.summary()
-
+    print()
