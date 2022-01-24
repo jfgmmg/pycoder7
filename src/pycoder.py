@@ -1,12 +1,39 @@
 """
-This module implements a RLE compressor and decompressor.
+This module implements a RLE compressor and decompressor. Two RLE
+methods are implemented here:
 
-It's also a script and GUI application. Please see function '_main'
-for instructions on how to use 'pycoder.py' as script or GUI app.
+    A - Each ocurrence of a new byte is replaced by a counter with the 
+        number of consecutive occurrences and the byte itself.
+        Examples: 
+            1) b'LLLLARRB' -> b'\x04L\x01A\x02R\x01B'.
+            2) b'ABC'      -> b'\x01A\x01B\x01C'
+
+    B - Only series with repetition (two or more consecutive occurrences
+        of the same byte) are replaced by a double ocurrence of the
+        byte and a counter. Bytes that don't repeat are passed directly
+        to the output stream. 
+        Examples: 
+            1) b'LLLLARRB' -> b'LL\x04ARR\x02B'.
+            2) b'ABC'      -> b'ABC'
+        A double occurrence of the encoded byte "tells" the decoder that
+        the next byte is a counter, whereas a byte that doesn't repeat 
+        is copied directly to the output stream.
+
+Please consult Wikipedia to obtain more information about RLE in general
+and these specific methods.
+
+This module is also a script and GUI application. Please see function 
+'_main' for instructions on how to use 'pycoder.py' as script or GUI 
+app.
 """
 
 import io
+import os
+import sys
+from textwrap import dedent
 from typing import BinaryIO
+
+from docopt import docopt
 
 __all__ = [
     'encode_rle',
@@ -160,6 +187,32 @@ def _main():
     """
     Interactive script.
     """
+    # If it wasn't for dependency determination done by 3rd party
+    # tools (code analysers, build tools, ), the following 
+    # modules should be imported right here, since they are irrelevant
+    # for the main purpose of this module (RLE encoding) and only useful
+    # when the module is used as a shell/GUI tool
+    #   import os
+    #   import sys
+    #   from textwrap import dedent
+    #   from docopt import docopt
+
+    doc = """
+    Run-Lenth enconding and decoding.
+
+    Usage:
+        pycoder (-c [-t TYPE] | -d | -x) [-p PASSWD] FILE
+
+    Options:
+        -c, --encode, --compress      Compress FILE with RLE compression
+        -d, --decode, --decompress    Decompress FILE compressed with RLE
+        -t TYPE, --type=TYPE          Encoding method used [default: 2]
+        -x, --dump                    Dumps a file as a Python's binary string
+        -h, --help                    This help 
+        -p PASSWORD, --password=PASSWORD  An optional password to encrypt the file
+    """
+    args = docopt(dedent(doc))
+
     def overwrite_if_needed_or_exit(dest_file_path: str):
         if os.path.exists(dest_file_path):
             answer = input(f"File {dest_file_path} exists. Overwrite (y or n)? ")
